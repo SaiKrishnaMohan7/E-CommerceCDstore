@@ -1,0 +1,54 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from OrderProcessImplService WSDL service -->
+
+  <service name="OrderProcessImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://OrderProcess.WebServices.org"/>
+      <parameter name="wsdlServiceElement" value="OrderProcessImplService"/>
+      <parameter name="schemaQualified" value="http://OrderProcess.WebServices.org"/>
+      <parameter name="wsdlServicePort" value="OrderProcessImpl"/>
+      <parameter name="className" value="org.WebServices.OrderProcess.OrderProcessImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="OrderProcessImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getAccount" qname="operNS:getAccount" xmlns:operNS="http://OrderProcess.WebServices.org" returnQName="retNS:getAccountReturn" xmlns:retNS="http://OrderProcess.WebServices.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:accountName" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:accountPassword" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="createOrder" qname="operNS:createOrder" xmlns:operNS="http://OrderProcess.WebServices.org" returnQName="retNS:createOrderReturn" xmlns:retNS="http://OrderProcess.WebServices.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:order_id" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:customer_id" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:shipping_id" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:billing_id" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:order_date" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:total" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:shipping_cost" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:tax" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:grand_total" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:status" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="createAccount" qname="operNS:createAccount" xmlns:operNS="http://OrderProcess.WebServices.org" returnQName="retNS:createAccountReturn" xmlns:retNS="http://OrderProcess.WebServices.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:login" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:customer_id" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:date_created" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:late_accessed" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:attempts" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="confirmOrder" qname="operNS:confirmOrder" xmlns:operNS="http://OrderProcess.WebServices.org" returnQName="retNS:confirmOrderReturn" xmlns:retNS="http://OrderProcess.WebServices.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:order_id" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:status" xmlns:pns="http://OrderProcess.WebServices.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="createAccount confirmOrder getAccount createOrder"/>
+
+  </service>
+</deployment>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="generate-client-Product" default="generate-client" basedir=".">
+
+    <property name="java.home" value="C:\Program Files\Java\jdk1.7.0_40" />
+    <property name="wsdl.location" 
+           value="http://localhost:8080/ProductCatalogWService/services/ProductCatalogImpl?wsdl" />
+
+    <target name="generate-client">
+        <exec executable="C:\Program Files\Java\jdk1.7.0_40\bin\wsimport.exe">
+            <arg line="${wsdl.location} -s src -Xdebug -verbose -Xnocompile" />
+        </exec>
+    </target>
+	
+</project>

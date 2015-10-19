@@ -1,0 +1,34 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ProductCatalogImplService WSDL service -->
+
+  <service name="ProductCatalogImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.org"/>
+      <parameter name="wsdlServiceElement" value="ProductCatalogImplService"/>
+      <parameter name="schemaQualified" value="http://service.org"/>
+      <parameter name="wsdlServicePort" value="ProductCatalogImpl"/>
+      <parameter name="className" value="org.service.ProductCatalogImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ProductCatalogImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getProductInfo" qname="operNS:getProductInfo" xmlns:operNS="http://service.org" returnQName="retNS:getProductInfoReturn" xmlns:retNS="http://service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:product_id" xmlns:pns="http://service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCategoryList" qname="operNS:getCategoryList" xmlns:operNS="http://service.org" returnQName="retNS:getCategoryListReturn" xmlns:retNS="http://service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getProductList" qname="operNS:getProductList" xmlns:operNS="http://service.org" returnQName="retNS:getProductListReturn" xmlns:retNS="http://service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:category_id" xmlns:pns="http://service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getProductList getCategoryList getProductInfo"/>
+
+  </service>
+</deployment>
